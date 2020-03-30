@@ -9,12 +9,14 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_main">
 
+   
     <TextView
+        android:text="test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Hello World!" />
-
+        android:id="@+id/textView1" />
+       
     <LinearLayout
         android:orientation="horizontal"
         android:minWidth="25px"
@@ -24,14 +26,9 @@
         android:id="@+id/linearLayout1">
         <Button
             android:text="Button"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/button1" />
-        <TextView
-            android:text="test"  
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/textView1" />
+            android:id="@+id/button1" />
        
 
     </LinearLayout>

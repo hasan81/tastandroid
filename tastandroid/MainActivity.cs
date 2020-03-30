@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
@@ -13,7 +14,8 @@ namespace tastandroid
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
-        Class1 _Class1;
+        public MySampleBroadcastReceiver _mySampleBroadcastReceiver = new MySampleBroadcastReceiver();
+
         private TextView idTextView;
         private static string _uploadstring;
         public string Uploadstring
@@ -37,17 +39,20 @@ namespace tastandroid
             Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
             SetSupportActionBar(toolbar);
 
-            Uploadstring = "88888";
+            Uploadstring = "Test";
             FloatingActionButton fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
             fab.Click += FabOnClick;
+
             idTextView = FindViewById<TextView>(Resource.Id.textView1);
             idTextView.Text = Uploadstring;
 
             Button button = FindViewById<Button>(Resource.Id.button1);
             button.Click += Button_Click;
+            RegisterReceiver(new MySampleBroadcastReceiver(), new IntentFilter("com.xamarin.example.TEST"));
 
-            _Class1 = new Class1();
-            _Class1.UpdateText += _Class1_UpdateText;
+
+
+            _mySampleBroadcastReceiver.UpdateText += _Class1_UpdateText;
 
         }
 
@@ -59,11 +64,13 @@ namespace tastandroid
 
         private  void Button_Click(object sender, EventArgs e)
         {
-            _Class1 = new Class1();
-            _Class1.test("00000");
+            Intent message = new Intent("com.xamarin.example.TEST");
+            SendBroadcast(message);
+            _mySampleBroadcastReceiver.Dispose();
 
-            // Uploadstring = "00000";
-            // idTextView.Text = Uploadstring;
+
+            //Uploadstring = "Hurray it works";
+            //idTextView.Text = Uploadstring;
 
 
         }
